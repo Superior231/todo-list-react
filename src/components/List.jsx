@@ -20,7 +20,8 @@ function List({ sortedItems, onDeleteItem, onToggleChecked, progress, onClearIte
             <hr className="text-light" />
 
             {sortedItems.length > 0 && (
-                <div className="d-flex justify-content-end">
+                <div className="d-flex justify-content-between">
+                    <span className="text-light">{sortedItems.filter((item) => item.checked).length}/{sortedItems.length} items</span>
                     <button
                         type="button"
                         className="d-flex align-items-center bg-transparent border-0 text-light text-decoration-underline fst-italic"
