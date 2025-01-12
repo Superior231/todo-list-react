@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import Header from './Header'
-import Form from './Form'
-import List from './List'
+import Header from '../components/Header'
+import Form from '../components/Form'
+import List from '../components/List'
 import { useState } from 'react'
 
 function App() {
