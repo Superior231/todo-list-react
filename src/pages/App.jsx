@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Form from '../components/Form';
 import List from '../components/List';
+import Footer from '../components/Footer';
 
 function App() {
   const [items, setItems] = useState(() => {
@@ -92,25 +93,28 @@ function App() {
   }
 
   return (
-    <div className="container">
-      <div className="card">
-        <div className="card-body p-lg-4">
-          <Header />
-          <Form
-            onAddItem={handleAddItem}
-            sortBy={sortBy}
-            onSortChange={setSortBy}
-          />
-          <List
-            sortedItems={sortedItems}
-            onDeleteItem={handleDeleteItem}
-            onToggleChecked={handleToggleChecked}
-            onClearItems={handleClearItems}
-            progress={progress}
-          />
+    <>
+      <div className="container">
+        <div className="card">
+          <div className="card-body p-lg-4">
+            <Header />
+            <Form
+              onAddItem={handleAddItem}
+              sortBy={sortBy}
+              onSortChange={setSortBy}
+            />
+            <List
+              sortedItems={sortedItems}
+              onDeleteItem={handleDeleteItem}
+              onToggleChecked={handleToggleChecked}
+              onClearItems={handleClearItems}
+              progress={progress}
+            />
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
