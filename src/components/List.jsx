@@ -19,15 +19,17 @@ function List({ sortedItems, onDeleteItem, onToggleChecked, progress, onClearIte
             </div>
             <hr className="text-light" />
 
-            <div className="d-flex justify-content-end">
-                <button
-                    type="button"
-                    className="d-flex align-items-center bg-transparent border-0 text-light text-decoration-underline fst-italic"
-                    onClick={onClearItems}
-                >
-                    Clear All
-                </button>
-            </div>
+            {sortedItems.length > 0 && (
+                <div className="d-flex justify-content-end">
+                    <button
+                        type="button"
+                        className="d-flex align-items-center bg-transparent border-0 text-light text-decoration-underline fst-italic"
+                        onClick={onClearItems}
+                    >
+                        Clear All
+                    </button>
+                </div>
+            )}
 
             <ul className="mt-4 mx-0 px-0" id="list-container">
                 {sortedItems.map((item) => (
