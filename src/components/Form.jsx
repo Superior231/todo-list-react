@@ -11,13 +11,14 @@ function Form({ onAddItem, onSortChange, sortBy }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (inputValue) {
-            const newItem = { name: inputValue, checked: false, id: Date.now() };
+        const trimmedInputValue = inputValue.trim();
+        if (trimmedInputValue) {
+            const newItem = { name: trimmedInputValue, checked: false, id: Date.now() };
             onAddItem(newItem);
 
             Swal.fire({
                 title: 'Success!',
-                text: `Added ${inputValue} to your todo list!`,
+                text: `Added ${trimmedInputValue} to your todo list!`,
                 icon: 'success',
                 confirmButtonText: 'OK',
             });
