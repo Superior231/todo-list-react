@@ -1,14 +1,24 @@
 /* eslint-disable no-undef */
-import Header from '../components/Header'
-import Form from '../components/Form'
-import List from '../components/List'
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import Header from '../components/Header';
+import Form from '../components/Form';
+import List from '../components/List';
 
 function App() {
-  const [items, setItems] = useState([]);
-  const [sortBy, setSortBy] = useState('oldest');
+  const [items, setItems] = useState(() => {
+    // Load items from localStorage
+    const savedItems = localStorage.getItem('todoItems');
+    return savedItems ? JSON.parse(savedItems) : [];
+  });
+
+  // Save items to localStorage
+  useEffect(() => {
+    localStorage.setItem('todoItems', JSON.stringify(items));
+  }, [items]);
+
 
   // Sorting Items
+  const [sortBy, setSortBy] = useState('oldest');
   let sortedItems;
   if (sortBy === 'oldest') {
     sortedItems = items;
@@ -18,7 +28,7 @@ function App() {
     sortedItems = items.slice().sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortBy === 'checked') {
     sortedItems = items.slice().sort((a, b) => b.checked - a.checked);
-  }  
+  }
 
   // Add Item
   function handleAddItem(item) {
@@ -34,10 +44,10 @@ function App() {
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       confirmButtonColor: '#d33',
-      cancelButtonText: 'Cencel',
+      cancelButtonText: 'Cancel',
       customClass: {
         icon: 'border-danger text-danger',
-      }
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         setItems(items.filter((i) => i.id !== itemId));
@@ -60,7 +70,6 @@ function App() {
     ? (items.filter((item) => item.checked).length / items.length) * 100
     : 0;
 
-
   // Clear All Items
   function handleClearItems() {
     Swal.fire({
@@ -73,7 +82,7 @@ function App() {
       cancelButtonText: 'Cancel',
       customClass: {
         icon: 'border-danger text-danger',
-      }
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         setItems([]);
@@ -102,7 +111,7 @@ function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
